@@ -4,14 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const nomeInput = document.getElementById('nome-usuario');
     const emailInput = document.getElementById('email-usuario');
     const textoInput = document.getElementById('texto-comentario');
-    const enviarBtn = document.getElementById('enviar-comentario');
 
-    // Carrega comentários salvos no localStorage
+    
     carregarComentarios();
 
     // Adiciona evento ao formulário
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
         adicionarComentario();
     });
 
@@ -34,16 +33,14 @@ document.addEventListener('DOMContentLoaded', function() {
             data: data.toLocaleString('pt-BR'),
             atual: true
         };
-
-        // Adiciona ao DOM
+       
         criarElementoComentario(comentario);
 
-        // Salva no localStorage
         salvarComentario(comentario);
-
-        // Limpa o formulário
-        textoInput.value = '';
+        
+        nomeInput.value = '';
         emailInput.value = '';
+        textoInput.value = '';
         textoInput.focus();
     }
 
@@ -60,20 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="comentario-texto">${comentario.texto}</div>
             <div class="comentario-acoes">
                 <button class="btn-responder">Responder</button>
-                <button class="btn-curtir">Curtir</button>
             </div>
         `;
 
-        // Insere no topo da lista
         listaComentarios.prepend(comentarioDiv);
 
-        // Adiciona eventos aos botões
         comentarioDiv.querySelector('.btn-responder').addEventListener('click', function() {
             responderComentario(comentario.nome);
-        });
-
-        comentarioDiv.querySelector('.btn-curtir').addEventListener('click', function() {
-            curtirComentario(comentario.id);
         });
     }
 
@@ -82,15 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         textoInput.focus();
     }
 
-    function curtirComentario(id) {
-        // Implementação de curtidas pode ser adicionada aqui
-        console.log(`Curtiu comentário ${id}`);
-    }
-
     function salvarComentario(comentario) {
         let comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
         
-        // Remove a flag 'atual' antes de salvar
         const comentarioParaSalvar = {...comentario, atual: false};
         
         comentarios.unshift(comentarioParaSalvar);

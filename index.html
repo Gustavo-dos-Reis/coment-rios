@@ -10,20 +10,18 @@
     <div class="container">
         <h1>Deixe seu comentário</h1>
         
-        <div class="comentario-form">
+        <form class="comentario-form">
             <div class="usuario-info">
                 <input type="text" id="nome-usuario" placeholder="Seu nome" required>
                 <input type="email" id="email-usuario" placeholder="Seu e-mail (opcional)">
             </div>
             <textarea id="texto-comentario" placeholder="Escreva seu comentário aqui..." required></textarea>
-            <button id="enviar-comentario">Publicar Comentário</button>
-        </div>
+            <button type="submit" id="enviar-comentario">Publicar</button>
+        </form>
         
         <div class="comentarios-container">
             <h2>Comentários</h2>
-            <div id="lista-comentarios">
-                <!-- Comentários serão inseridos aqui via JavaScript -->
-            </div>
+            <div id="lista-comentarios"> </div>
         </div>
     </div>
 
